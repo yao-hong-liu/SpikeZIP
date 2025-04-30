@@ -65,7 +65,8 @@ n_ADCs = 8              # Number of ADCs per RCS
 # %% IMPORT INPUT DATA
 # =============================================================================
 time_range_input = np.arange(n_samples_cut) + start_sample_cut
-data = np.fromfile( input_dataset_path, count = n_samples_cut*385, dtype='int16', offset = start_sample_cut*n_chs*2 ).reshape(n_samples_cut, 385)[ time_range_input, -128:]     # Read NPXv1 dataset and time-cut it
+data_NPX = np.fromfile( input_dataset_path, count = n_samples_cut*385, dtype='int16', offset = start_sample_cut*385*2 ).reshape(len(time_range_input), 385)[ :, -n_chs:]     # Read NPXv1 dataset and time-cut it
+data_NPX = data_NPX.T
 
 NPX_datarate = 163.8e6/3                                                                # Expected input datarate NPXv1
 
